@@ -1,1 +1,3 @@
 ---
+promtail::bin_dir: '/usr/local/bin'
+promtail::version: 'v0.3.0'
