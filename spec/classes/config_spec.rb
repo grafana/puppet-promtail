@@ -40,6 +40,9 @@ describe 'promtail::config' do
         end
 
         it { is_expected.to compile }
+        it { is_expected.to contain_file('/etc/promtail/.gc_pw') }
+        it { is_expected.to contain_file('/etc/promtail/config.yaml').with_content(%r{^---.client}m) }
+        it { is_expected.to contain_file('/etc/promtail/config.yaml').with_content(%r{\s+__path__: "/var/log/messages"$}) }
       end
       context 'without a config_hash provided' do
         let(:facts) { os_facts }
