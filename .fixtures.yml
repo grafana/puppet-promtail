@@ -3,4 +3,6 @@
 ---
 fixtures:
   forge_modules:
-#     stdlib: "puppetlabs/stdlib"
+    archive: 'puppet/archive'
+    systemd: 'camptocamp/systemd'
+    stdlib: 'puppetlabs/stdlib'

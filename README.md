@@ -1,6 +1,5 @@
 # promtail
 
-# replace promtail in each badge
 ![](https://img.shields.io/puppetforge/pdk-version/genebean/promtail.svg?style=popout)
 ![](https://img.shields.io/puppetforge/v/genebean/promtail.svg?style=popout)
 ![](https://img.shields.io/puppetforge/dt/genebean/promtail.svg?style=popout)
@@ -11,16 +10,11 @@
 Deploy and configure Grafana's Promtail.
 
 - [Description](#description)
-- [Setup](#setup)
-  - [What promtail affects **OPTIONAL**](#what-promtail-affects-optional)
-  - [Setup Requirements **OPTIONAL**](#setup-requirements-optional)
-  - [Beginning with promtail](#beginning-with-promtail)
 - [Usage](#usage)
 - [Reference](#reference)
 - [Changelog](#changelog)
 - [Limitations](#limitations)
 - [Development](#development)
-- [Release Notes/Contributors/Etc. **Optional**](#release-notescontributorsetc-optional)
 
 ## Description
 
@@ -34,31 +28,9 @@ It primarily:
 
 Currently, Promtail can tail logs from two sources: local log files and the systemd journal (on AMD64 machines only).
 
-## Setup
-
-### What promtail affects **OPTIONAL**
-
-If it's obvious what your module touches, you can skip this section. For example, folks can probably figure out that your mysql_instance module affects their MySQL instances.
-
-If there's more that they should know about, though, this is the place to mention:
-
-* Files, packages, services, or operations that the module will alter, impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled, another module, etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps for upgrading, you might want to include an additional "Upgrading" section here.
-
-### Beginning with promtail
-
-The very basic steps needed for a user to get the module up and running. This can include setup steps, if necessary, or it can be an example of the most basic use of the module.
-
 ## Usage
 
-Include usage examples for common use cases in the **Usage** section. Show your users how to use your module to solve problems, and be sure to include code examples. Include three to five examples of the most important or common tasks a user can accomplish with your module. Show users how to accomplish more complex tasks that involve different types, classes, and functions working in tandem.
+The simplest way to get started with this module is to add `include promtail` to a manifest and create your config settings in Hiera. Additional details and examples are contained in [REFERENCE.md](REFERENCE.md).
 
 ## Reference
 
@@ -73,12 +45,8 @@ Please see [REFERENCE.md](REFERENCE.md) for more info.
 
 ## Limitations
 
-In the Limitations section, list any incompatibilities, known issues, or other warnings.
+At the moment, this module only supports Linux. Future versions will support additional OS's including Windows.
 
 ## Development
 
-In the Development section, tell other users the ground rules for contributing to your project and how they should submit their work.
-
-## Release Notes/Contributors/Etc. **Optional**
-
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You can also add any additional sections you feel are necessary or important to include here. Please use the `## ` header.
+Pull requests are welcome!
