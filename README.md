@@ -1,9 +1,9 @@
 # promtail
 
-![](https://img.shields.io/puppetforge/pdk-version/genebean/promtail.svg?style=popout)
-![](https://img.shields.io/puppetforge/v/genebean/promtail.svg?style=popout)
-![](https://img.shields.io/puppetforge/dt/genebean/promtail.svg?style=popout)
-[![Build Status](https://travis-ci.org/genebean/genebean-promtail.svg?branch=master)](https://travis-ci.org/genebean/genebean-promtail)
+![](https://img.shields.io/puppetforge/pdk-version/grafana/promtail.svg?style=popout)
+![](https://img.shields.io/puppetforge/v/grafana/promtail.svg?style=popout)
+![](https://img.shields.io/puppetforge/dt/grafana/promtail.svg?style=popout)
+[![Build Status](https://travis-ci.org/genebean/grafana-promtail.svg?branch=master)](https://travis-ci.org/genebean/grafana-promtail)
 
 > NOTE: This module is currently in the genebean namespace on GitHub instead of Grafana's. The intention is to transfer this repository to them after initial development.
 
