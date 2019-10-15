@@ -7,7 +7,6 @@
 /.bundle/
 /.idea/
 /.vagrant/
-/Vagrantfile
 /coverage/
 /bin/
 /doc/
