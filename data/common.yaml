@@ -7,4 +7,5 @@ lookup_options:
     convert_to: 'Sensitive'
 
 promtail::bin_dir: '/usr/local/bin'
+promtail::service_ensure: 'running'
 promtail::version: 'v0.3.0'

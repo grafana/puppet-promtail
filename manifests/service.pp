@@ -12,7 +12,7 @@ class promtail::service {
       }
 
       service { 'promtail':
-        ensure  => running,
+        ensure  => $promtail::service_ensure,
         require => Systemd::Unit_file['promtail.service'],
       }
     }
