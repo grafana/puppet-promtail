@@ -4,5 +4,6 @@
 fixtures:
   forge_modules:
     archive: 'puppet/archive'
+    concat: 'puppetlabs/concat'
     systemd: 'camptocamp/systemd'
     stdlib: 'puppetlabs/stdlib'

@@ -17,6 +17,7 @@ _Private Classes_
 
 **Functions**
 
+* [`promtail::strip_yaml_header`](#promtailstrip_yaml_header): A function to strip the --- from the beginning of a string
 * [`promtail::to_yaml`](#promtailto_yaml): A function to convert a hash into yaml for the promtail config
 
 ## Classes
@@ -29,52 +30,15 @@ logs to Loki.
 
 #### Examples
 
-##### Config settings in Hiera
+##### 
 
 ```puppet
 include promtail
 ```
 
-##### eyaml encrypted password in Hiera
+##### 
 
 ```puppet
----
-lookup_options:
-  '^promtail::password_file_content$':
-    convert_to: 'Sensitive'
-
-promtail::password_file_content: ENC[PKCS7,MIIBasdfasdfasdfasdfasdfasdf==]
-```
-
-##### In-manifest config
-
-```puppet
-$config_hash = {
-  'client'         => {
-    'url'        => 'https://logs-us-west1.grafana.net/api/prom/push',
-    'basic_auth' => {
-      'username'      => '1234',
-      'password_file' => '/etc/promtail/.gc_pw',
-    },
-  },
-  'scrape_configs' => [
-    {
-      'job_name'       => 'system',
-      'entry_parser'   => 'raw',
-      'static_configs' => [
-        {
-          'targets' => [ 'localhost' ],
-          'labels'  => {
-            'job'      => 'var_log_messages',
-            'host'     => $facts['networking']['fqdn'],
-            '__path__' => '/var/log/messages',
-          },
-        },
-      ],
-    },
-  ],
-}
-
 class { 'promtail':
   config_hash           => $config_hash,
   password_file_path    => '/etc/promtail/.gc_pw',
@@ -82,17 +46,81 @@ class { 'promtail':
 }
 ```
 
+##### Settings in a Hiera file
+
+```puppet
+---
+promtail::password_file_path: '/etc/promtail/.gc_pw'
+promtail::password_file_content: ENC[PKCS7,MIIBasdfasdfasdfasdfasdfasdf==]
+promtail::server_config_hash:
+  server:
+    http_listen_port: 9274
+    grpc_listen_port: 0
+promtail::clients_config_hash:
+  clients:
+    - url: 'https://logs-us-west1.grafana.net/api/prom/push'
+      basic_auth:
+        username: '1234'
+        password_file: '/etc/promtail/.gc_pw'
+promtail::positions_config_hash:
+  positions:
+    filename: /tmp/positions.yaml
+promtail::scrape_configs_hash:
+  scrape_configs:
+    - job_name: system_secure
+      entry_parser: raw
+      static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: var_log_secure
+          host: "%{facts.networking.fqdn}"
+          __path__: /var/log/secure
+    - job_name: system_messages
+      entry_parser: raw
+      static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: var_log_messages
+          host: "%{facts.networking.fqdn}"
+          __path__: /var/log/messages
+```
+
 #### Parameters
 
 The following parameters are available in the `promtail` class.
 
-##### `config_hash`
+##### `service_ensure`
+
+Data type: `Enum['running', 'stopped']`
+
+The value passed to the service resource's ensure parameter for promtail's service
+
+##### `clients_config_hash`
 
 Data type: `Hash`
 
-A hash representing the configuration to be used by promtail.
-See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md#example-journal-config
-for all paramters.
+Describes how Promtail connects to multiple instances of Loki, sending logs to each.
+See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+for all parameters.
+
+##### `positions_config_hash`
+
+Data type: `Hash`
+
+Describes how to save read file offsets to disk.
+See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+for all parameters.
+
+##### `scrape_configs_hash`
+
+Data type: `Hash`
+
+Each scrape_config block configures how Promtail can scrape logs from a series of targets
+using a specified discovery method.
+See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+for all parameters.
 
 ##### `bin_dir`
 
@@ -115,6 +143,28 @@ Data type: `String[1]`
 The version as listed on the GitHub release page
 See https://github.com/grafana/loki/releases for a list
 
+##### `server_config_hash`
+
+Data type: `Optional[Hash]`
+
+Configures Promtail's behavior as an HTTP server. Defaults will be used if this block
+is omitted.
+See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+for all parameters.
+
+Default value: `undef`
+
+##### `target_config_hash`
+
+Data type: `Optional[Hash]`
+
+Configures how tailed targets will be watched. Defaults will be used if this block
+is omitted.
+See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+for all parameters.
+
+Default value: `undef`
+
 ##### `$password_file_path`
 
 Data type: `Optional[Stdlib::Absolutepath]`
@@ -125,7 +175,8 @@ The fully qualified path to the file containing the password used for basic auth
 
 Data type: `Optional[Sensitive[String[1]]]`
 
-The value to be placed in the password file.
+The value to be placed in the password file. This value is cast to Sensitive via
+lookup_options defined in data/common.yaml
 
 ##### `password_file_path`
 
@@ -144,6 +195,48 @@ Data type: `Optional[Sensitive[String[1]]]`
 Default value: `undef`
 
 ## Functions
+
+### promtail::strip_yaml_header
+
+Type: Ruby 4.x API
+
+A function to strip the --- from the beginning of a string
+
+#### Examples
+
+##### 
+
+```puppet
+concat::fragment { 'server_config_hash':
+  target  => $config_file,
+  content => $promtail::server_config_hash.promtail::to_yaml.promtail::strip_yaml_header,
+  order   => '10',
+}
+```
+
+#### `promtail::strip_yaml_header(String $yaml_string)`
+
+A function to strip the --- from the beginning of a string
+
+Returns: `String` Returns the string with the leading header stripped off
+
+##### Examples
+
+###### 
+
+```puppet
+concat::fragment { 'server_config_hash':
+  target  => $config_file,
+  content => $promtail::server_config_hash.promtail::to_yaml.promtail::strip_yaml_header,
+  order   => '10',
+}
+```
+
+##### `yaml_string`
+
+Data type: `String`
+
+A string that may start with the ---'s used to denote a YAML file
 
 ### promtail::to_yaml
 
