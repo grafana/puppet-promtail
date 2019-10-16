@@ -7,33 +7,42 @@ describe 'promtail' do
         let(:facts) { os_facts }
         let(:params) do
           {
-            'config_hash' => {
-              'client' => {
+            'password_file_path'    => '/etc/promtail/.gc_pw',
+            'password_file_content' => RSpec::Puppet::RawString.new("Sensitive('myPassword')"),
+            'server_config_hash'    => {
+              'server' => {
+                'http_listen_port' => 9274,
+                'grpc_listen_port' => 0,
+              },
+            },
+            'clients_config_hash' => {
+              'clients' => [{
                 'url'        => 'https://logs-us-west1.grafana.net/api/prom/push',
                 'basic_auth' => {
-                  'username'      => '1234',
+                  'username' => '1234',
                   'password_file' => '/etc/promtail/.gc_pw',
                 },
-              },
-              'scrape_configs' => [
-                {
-                  'job_name'       => 'system',
-                  'entry_parser'   => 'raw',
-                  'static_configs' => [
-                    {
-                      'targets' => ['localhost'],
-                      'labels'  => {
-                        'job'      => 'var_log_messages',
-                        'host'     => "${facts['networking']['fqdn']}",
-                        '__path__' => '/var/log/messages',
-                      },
-                    },
-                  ],
-                },
-              ],
+              }],
             },
-            'password_file_path' => '/etc/promtail/.gc_pw',
-            'password_file_content' => RSpec::Puppet::RawString.new("Sensitive('myPassword')"),
+            'positions_config_hash' => {
+              'positions' => {
+                'filename' => '/tmp/positions.yaml',
+              },
+            },
+            'scrape_configs_hash' => {
+              'scrape_configs' => [{
+                'job_name'       => 'system_secure',
+                'entry_parser'   => 'raw',
+                'static_configs' => [{
+                  'targets' => ['localhost'],
+                  'labels'  => {
+                    'job'      => 'var_log_secure',
+                    'host'     => "$facts['networking']['fqdn']",
+                    '__path__' => '/var/log/messages',
+                  },
+                }],
+              }],
+            },
           }
         end
 
@@ -41,8 +50,11 @@ describe 'promtail' do
       end
       context 'without a config_hash provided' do
         let(:facts) { os_facts }
+        let(:pre_condition) { 'include promtail' }
 
-        it { is_expected.to compile.and_raise_error(%r{expects a value for parameter 'config_hash'}) }
+        it { is_expected.to compile.and_raise_error(%r{expects a value for parameter 'clients_config_hash'}) }
+        it { is_expected.to compile.and_raise_error(%r{expects a value for parameter 'positions_config_hash'}) }
+        it { is_expected.to compile.and_raise_error(%r{expects a value for parameter 'scrape_configs_hash'}) }
       end
     end
   end
