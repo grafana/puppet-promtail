@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "author": "grafana",
   "summary": "Deploy and configure Grafana's Promtail",
-  "license": "BSD-3-Clause",
-  "source": "https://github.com/genebean/grafana-promtail.git",
-  "project_page": "https://github.com/genebean/grafana-promtail",
-  "issues_url": "https://github.com/genebean/grafana-promtail/issues",
+  "license": "Apache-2.0",
+  "source": "https://github.com/grafana/puppet-promtail.git",
+  "project_page": "https://github.com/grafana/puppet-promtail",
+  "issues_url": "https://github.com/grafana/puppet-promtail/issues",
   "dependencies": [
     {
       "name": "camptocamp/systemd",
