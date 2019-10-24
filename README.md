@@ -1,13 +1,11 @@
-# promtail
+# Promtail
 
 ![](https://img.shields.io/puppetforge/pdk-version/grafana/promtail.svg?style=popout)
 ![](https://img.shields.io/puppetforge/v/grafana/promtail.svg?style=popout)
 ![](https://img.shields.io/puppetforge/dt/grafana/promtail.svg?style=popout)
-[![Build Status](https://travis-ci.org/genebean/grafana-promtail.svg?branch=master)](https://travis-ci.org/genebean/grafana-promtail)
+![Drone (cloud)](https://img.shields.io/drone/build/grafana/puppet-promtail?stype=popout)
 
-> NOTE: This module is currently in the genebean namespace on GitHub instead of Grafana's. The intention is to transfer this repository to them after initial development.
-
-Deploy and configure Grafana's Promtail.
+Deploy and configure Grafana's Promtail on a node.
 
 - [Description](#description)
 - [Usage](#usage)
@@ -49,4 +47,4 @@ At the moment, this module only supports Linux. Future versions will support add
 
 ## Development
 
-Pull requests are welcome!
+Pull requests are welcome! A Vagrantfile is also included in this repository that can be used during development.
