@@ -5,5 +5,7 @@ fixtures:
   forge_modules:
     archive: 'puppet/archive'
     concat: 'puppetlabs/concat'
+    inifile: 'puppetlabs/inifile'
     systemd: 'camptocamp/systemd'
     stdlib: 'puppetlabs/stdlib'
+    translate: 'puppetlabs/translate'
