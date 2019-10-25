@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [ '2.4.x', '2.5.x' ]
+
+    name: Ruby ${{ matrix.ruby }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        architecture: 'x64'
+    - name: Run tests
+      run: |
+        RUBY_MINOR_VERSION=$(ruby --version |cut -f 2 -d ' ' | cut -d '.' -f1,2)
+        case $RUBY_MINOR_VERSION in
+          '2.4')
+            PUPPET_GEM_VERSION='~> 5.0'
+            ;;
+          '2.5')
+            PUPPET_GEM_VERSION='~> 6.0'
+            ;;
+          *)
+            exit 1
+            ;;
+        esac
+        gem install bundler
+        bundle -v
+        rm -f Gemfile.lock
+        gem update --system $RUBYGEMS_VERSION
+        gem --version
+        bundle -v 
+        bundle install --jobs=3 --retry=3 --without system_tests
+        bundle exec rake check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint
+        bundle exec rake parallel_spec

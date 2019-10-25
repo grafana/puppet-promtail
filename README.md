@@ -3,7 +3,7 @@
 ![](https://img.shields.io/puppetforge/pdk-version/grafana/promtail.svg?style=popout)
 ![](https://img.shields.io/puppetforge/v/grafana/promtail.svg?style=popout)
 ![](https://img.shields.io/puppetforge/dt/grafana/promtail.svg?style=popout)
-![Drone (cloud)](https://img.shields.io/drone/build/grafana/puppet-promtail?stype=popout)
+![](https://github.com/grafana/puppet-promtail/workflows/CI/badge.svg)
 [![License](https://img.shields.io/github/license/grafana/puppet-promtail?stype=popout)](LICENSE)
 
 Deploy and configure Grafana's Promtail on a node.
