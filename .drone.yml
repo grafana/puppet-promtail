@@ -3,7 +3,7 @@ kind: pipeline
 name: ruby-2-5-3
 
 steps:
-  - name: pupept6
+  - name: puppet6
     image: ruby:2.5.3
     environment:
       PUPPET_GEM_VERSION: "~> 6.0"
