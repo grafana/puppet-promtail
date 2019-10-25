@@ -1,6 +1,8 @@
 ---
 .gitlab-ci.yml:
   delete: true
+.travis.yml:
+  delete: true
 appveyor.yml:
   delete: true
 Gemfile:
