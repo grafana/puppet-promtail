@@ -18,9 +18,8 @@ steps:
     image: ruby:2.5.3
     depends_on:
       - install
-    environment:
-      BUNDLE_PATH: "vendor/bundle"
     commands:
+      - "echo \\"---\\nBUNDLE_PATH: 'vendor/bundle'\\" > /usr/local/bundle/config"
       - bundle exec rake check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint
   - name: spec
     image: ruby:2.5.3
@@ -28,8 +27,8 @@ steps:
       - install
     environment:
       PUPPET_GEM_VERSION: "~> 6.0"
-      BUNDLE_PATH: "vendor/bundle"
     commands:
+      - "echo \\"---\\nBUNDLE_PATH: 'vendor/bundle'\\" > /usr/local/bundle/config"
       - bundle exec rake parallel_spec
 
 ---
@@ -54,6 +53,6 @@ steps:
       - install
     environment:
       PUPPET_GEM_VERSION: "~> 5.0"
-      BUNDLE_PATH: "vendor/bundle"
     commands:
+      - "echo \\"---\\nBUNDLE_PATH: 'vendor/bundle'\\" > /usr/local/bundle/config"
       - bundle exec rake parallel_spec
