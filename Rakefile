@@ -17,7 +17,7 @@ end
 def changelog_project
   return unless Rake.application.top_level_tasks.include? "changelog"
 
-  returnVal = "grafana-promtail"
+  returnVal = "puppet-promtail"
   returnVal ||= begin
     metadata_source = JSON.load(File.read('metadata.json'))['source']
     metadata_source_match = metadata_source && metadata_source.match(%r{.*\/([^\/]*?)(?:\.git)?\Z})
