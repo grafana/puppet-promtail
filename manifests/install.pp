@@ -17,13 +17,19 @@ class promtail::install {
   $version_dir = "${data_dir}/promtail-${promtail::version}"
   $binary_path = "${version_dir}/${release_file_name}"
 
+  if versioncmp($promtail::version, 'v1.0.0') > 0 {
+    $archive_type = 'zip'
+  } else {
+    $archive_type = 'gz'
+  }
+
   file { [$data_dir, $version_dir]:
     ensure => directory,
   }
 
   archive { "${binary_path}.gz":
     ensure        => present,
-    source        => "https://github.com/grafana/loki/releases/download/${promtail::version}/${release_file_name}.gz",
+    source        => "https://github.com/grafana/loki/releases/download/${promtail::version}/${release_file_name}.${archive_type}",
     extract       => true,
     extract_path  => $version_dir,
     creates       => $binary_path,
