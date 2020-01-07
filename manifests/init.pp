@@ -102,6 +102,14 @@
 #             host: "%{facts.networking.fqdn}"
 #             __path__: /var/log/messages
 #
+# @example Merging scrape configs in Hiera
+#   class profile::logging::promtail {
+#     $_real_scrape_configs_hash = lookup('promtail_scrape_configs_hash', {merge => 'deep'})
+#     class { 'promtail':
+#       scrape_configs_hash => $_real_scrape_configs_hash,
+#     }
+#   }
+#
 class promtail (
   Enum['running', 'stopped'] $service_ensure,
   Hash $clients_config_hash,
