@@ -87,6 +87,17 @@ promtail::scrape_configs_hash:
           __path__: /var/log/messages
 ```
 
+##### Merging scrape configs in Hiera
+
+```puppet
+class profile::logging::promtail {
+  $_real_scrape_configs_hash = lookup('promtail_scrape_configs_hash', {merge => 'deep'})
+  class { 'promtail':
+    scrape_configs_hash => $_real_scrape_configs_hash,
+  }
+}
+```
+
 #### Parameters
 
 The following parameters are available in the `promtail` class.
