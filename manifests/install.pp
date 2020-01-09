@@ -9,19 +9,23 @@ class promtail::install {
   case $facts['kernel'] {
     'Linux': {
       $data_dir = '/usr/local/promtail_data'
-      $release_file_name = 'promtail_linux_amd64'
+      if versioncmp($promtail::version, 'v0.3.0') > 0 {
+        $release_file_name = 'promtail-linux-amd64'
+      } else {
+        $release_file_name = 'promtail_linux_amd64'
+      }
     }
     default: { fail("${facts['kernel']} is not yet supported") }
   }
-
-  $version_dir = "${data_dir}/promtail-${promtail::version}"
-  $binary_path = "${version_dir}/${release_file_name}"
 
   if versioncmp($promtail::version, 'v1.0.0') > 0 {
     $archive_type = 'zip'
   } else {
     $archive_type = 'gz'
   }
+
+  $version_dir = "${data_dir}/promtail-${promtail::version}"
+  $binary_path = "${version_dir}/${release_file_name}"
 
   file { [$data_dir, $version_dir]:
     ensure => directory,
