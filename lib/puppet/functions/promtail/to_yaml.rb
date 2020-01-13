@@ -2,7 +2,7 @@ require 'yaml'
 
 # A function to convert a hash into yaml for the promtail config
 Puppet::Functions.create_function(:'promtail::to_yaml') do
-  # @param [Hash] config_hash
+  # @param config_hash
   #   A Puppet hash to be converted into YAML
   # @return [String]
   #   Returns the YAML version of the hash as a string

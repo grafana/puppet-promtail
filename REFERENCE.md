@@ -176,24 +176,11 @@ for all parameters.
 
 Default value: `undef`
 
-##### `$password_file_path`
-
-Data type: `Optional[Stdlib::Absolutepath]`
-
-The fully qualified path to the file containing the password used for basic auth
-
-##### `$password_file_content`
-
-Data type: `Optional[Sensitive[String[1]]]`
-
-The value to be placed in the password file. This value is cast to Sensitive via
-lookup_options defined in data/common.yaml
-
 ##### `password_file_path`
 
 Data type: `Optional[Stdlib::Absolutepath]`
 
-
+The fully qualified path to the file containing the password used for basic auth
 
 Default value: `undef`
 
@@ -201,7 +188,8 @@ Default value: `undef`
 
 Data type: `Optional[Sensitive[String[1]]]`
 
-
+The value to be placed in the password file. This value is cast to Sensitive via
+lookup_options defined in `data/common.yaml`
 
 Default value: `undef`
 

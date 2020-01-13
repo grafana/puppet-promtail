@@ -47,12 +47,12 @@
 #   See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
 #   for all parameters.
 #
-# @param [Optional[Stdlib::Absolutepath]] $password_file_path
+# @param [Optional[Stdlib::Absolutepath]] password_file_path
 #   The fully qualified path to the file containing the password used for basic auth
 #
-# @param [Optional[Sensitive[String[1]]]] $password_file_content
+# @param [Optional[Sensitive[String[1]]]] password_file_content
 #   The value to be placed in the password file. This value is cast to Sensitive via
-#   lookup_options defined in data/common.yaml
+#   lookup_options defined in `data/common.yaml`
 #
 # @example
 #   include promtail
