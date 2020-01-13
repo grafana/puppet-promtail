@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [0.3.0](https://github.com/grafana/puppet-promtail/tree/0.3.0) (2020-01-13)
+
+[Full Changelog](https://github.com/grafana/puppet-promtail/compare/0.2.0...0.3.0)
+
+### Added
+
+- Bump default promtail version to v1.2.0 [\#14](https://github.com/grafana/puppet-promtail/pull/14) ([genebean](https://github.com/genebean))
+- Add example of merging scrape configs from Hiera [\#13](https://github.com/grafana/puppet-promtail/pull/13) ([genebean](https://github.com/genebean))
+
+### Fixed
+
+- Release file name changed from version v0.4.0 [\#12](https://github.com/grafana/puppet-promtail/pull/12) ([LDaneliukas](https://github.com/LDaneliukas))
+- Modify the type of archive depending on release version [\#11](https://github.com/grafana/puppet-promtail/pull/11) ([LDaneliukas](https://github.com/LDaneliukas))
+
 ## [0.2.0](https://github.com/grafana/puppet-promtail/tree/0.2.0) (2019-12-12)
 
 [Full Changelog](https://github.com/grafana/puppet-promtail/compare/0.1.0...0.2.0)

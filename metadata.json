@@ -1,6 +1,6 @@
 {
   "name": "grafana-promtail",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "grafana",
   "summary": "Deploy and configure Grafana's Promtail",
   "license": "Apache-2.0",
@@ -69,7 +69,7 @@
       "version_requirement": ">= 4.10.0 < 7.0.0"
     }
   ],
-  "pdk-version": "1.14.1",
-  "template-url": "pdk-default#1.14.1",
-  "template-ref": "1.14.1-0-g0b5b39b"
+  "pdk-version": "1.15.0",
+  "template-url": "pdk-default#1.15.0",
+  "template-ref": "tags/1.15.0-0-g0bc522e"
 }
