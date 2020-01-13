@@ -1,6 +1,6 @@
 {
   "name": "grafana-promtail",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "grafana",
   "summary": "Deploy and configure Grafana's Promtail",
   "license": "Apache-2.0",
