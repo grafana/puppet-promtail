@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [0.3.1](https://github.com/grafana/puppet-promtail/tree/0.3.1) (2020-01-13)
+
+[Full Changelog](https://github.com/grafana/puppet-promtail/compare/0.3.0...0.3.1)
+
+### Fixed
+
+- Updated default checksum on Linux [\#16](https://github.com/grafana/puppet-promtail/pull/16) ([genebean](https://github.com/genebean))
+
 ## [0.3.0](https://github.com/grafana/puppet-promtail/tree/0.3.0) (2020-01-13)
 
 [Full Changelog](https://github.com/grafana/puppet-promtail/compare/0.2.0...0.3.0)
