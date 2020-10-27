@@ -111,17 +111,18 @@
 #   }
 #
 class promtail (
-  Enum['running', 'stopped'] $service_ensure,
-  Hash $clients_config_hash,
-  Hash $positions_config_hash,
-  Hash $scrape_configs_hash,
-  Stdlib::Absolutepath $bin_dir,
-  String[1] $checksum,
-  String[1] $version,
-  Optional[Hash] $server_config_hash = undef,
-  Optional[Hash] $target_config_hash = undef,
-  Optional[Stdlib::Absolutepath] $password_file_path = undef,
+  Enum['running', 'stopped']     $service_ensure,
+  Hash                           $clients_config_hash,
+  Hash                           $positions_config_hash,
+  Hash                           $scrape_configs_hash,
+  Stdlib::Absolutepath           $bin_dir,
+  String[1]                      $checksum,
+  String[1]                      $version,
+  Optional[Hash]                 $server_config_hash    = undef,
+  Optional[Hash]                 $target_config_hash    = undef,
+  Optional[Stdlib::Absolutepath] $password_file_path    = undef,
   Optional[Sensitive[String[1]]] $password_file_content = undef,
+  Stdlib::HTTPUrl                $source_url            = 'https://github.com/grafana/loki/releases/download',
 ){
   Class['promtail::install']
   -> Class['promtail::config']
