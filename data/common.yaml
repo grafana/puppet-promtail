@@ -8,5 +8,5 @@ lookup_options:
 
 promtail::bin_dir: '/usr/local/bin'
 promtail::service_ensure: 'running'
-promtail::version: 'v1.2.0'
+promtail::version: 'v2.0.0'
 
