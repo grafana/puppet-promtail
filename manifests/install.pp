@@ -33,7 +33,7 @@ class promtail::install {
 
   archive { "${binary_path}.gz":
     ensure        => present,
-    source        => "https://github.com/grafana/loki/releases/download/${promtail::version}/${release_file_name}.${archive_type}",
+    source        => "${promtail::source_url}/${promtail::version}/${release_file_name}.${archive_type}",
     extract       => true,
     extract_path  => $version_dir,
     creates       => $binary_path,
