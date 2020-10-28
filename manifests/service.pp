@@ -13,6 +13,7 @@ class promtail::service {
 
       service { 'promtail':
         ensure  => $promtail::service_ensure,
+        enable  => $promtail::service_enable,
         require => Systemd::Unit_file['promtail.service'],
       }
     }

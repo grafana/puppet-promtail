@@ -112,6 +112,7 @@
 #
 class promtail (
   Enum['running', 'stopped']     $service_ensure,
+  Boolean                        $service_enable,
   Hash                           $clients_config_hash,
   Hash                           $positions_config_hash,
   Hash                           $scrape_configs_hash,
