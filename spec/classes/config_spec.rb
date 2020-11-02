@@ -32,7 +32,6 @@ describe 'promtail::config' do
             scrape_configs_hash => {
               'scrape_configs' => [{
                 'job_name'       => 'system_secure',
-                'entry_parser'   => 'raw',
                 'static_configs' => [{
                   'targets' => [ 'localhost' ],
                   'labels'  => {
