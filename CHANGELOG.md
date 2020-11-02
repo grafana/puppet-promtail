@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [1.0.0](https://github.com/grafana/puppet-promtail/tree/1.0.0) (2020-11-02)
+
+[Full Changelog](https://github.com/grafana/puppet-promtail/compare/0.3.1...1.0.0)
+
+### Added
+
+- Enable service by default [\#22](https://github.com/grafana/puppet-promtail/pull/22) ([kubicgruenfeld](https://github.com/kubicgruenfeld))
+- bump default promtail version to v2.0.0 [\#20](https://github.com/grafana/puppet-promtail/pull/20) ([kubicgruenfeld](https://github.com/kubicgruenfeld))
+- allow custom source-url [\#19](https://github.com/grafana/puppet-promtail/pull/19) ([kubicgruenfeld](https://github.com/kubicgruenfeld))
+
 ## [0.3.1](https://github.com/grafana/puppet-promtail/tree/0.3.1) (2020-01-13)
 
 [Full Changelog](https://github.com/grafana/puppet-promtail/compare/0.3.0...0.3.1)
