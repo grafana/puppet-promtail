@@ -63,11 +63,19 @@
 # @example
 #   include promtail
 #
-# @example
+# @example Sample of defining within a profile
 #   class { 'promtail':
-#     config_hash           => $config_hash,
-#     password_file_path    => '/etc/promtail/.gc_pw',
-#     password_file_content => Sensitive('myPassword'),
+#     clients_config_hash   => $clients_config_hash,
+#     positions_config_hash => $positions_config_hash,
+#     scrape_configs_hash   => $_real_scrape_configs_hash,
+#     password_file_content => $sensitive_password_file_content,
+#     password_file_path    => $password_file_path,
+#     service_ensure        => $service_ensure,
+#     server_config_hash    => $server_config_hash,
+#     target_config_hash    => $target_config_hash,
+#     bin_dir               => $bin_dir,
+#     checksum              => $checksum,
+#     version               => $version,
 #   }
 #
 # @example Settings in a Hiera file
@@ -89,22 +97,22 @@
 #       filename: /tmp/positions.yaml
 #   promtail::scrape_configs_hash:
 #     scrape_configs:
-#       - job_name: system_secure
-#         static_configs:
-#         - targets:
-#             - localhost
+#       - job_name: journal
+#         journal:
+#           max_age: 12h
 #           labels:
-#             job: var_log_secure
+#             job: systemd-journal
 #             host: "%{facts.networking.fqdn}"
-#             __path__: /var/log/secure
-#       - job_name: system_messages
-#         static_configs:
-#         - targets:
-#             - localhost
-#           labels:
-#             job: var_log_messages
-#             host: "%{facts.networking.fqdn}"
-#             __path__: /var/log/messages
+#         relabel_configs:
+#           - source_labels:
+#               - '__journal__systemd_unit'
+#             target_label: 'unit'
+#           - source_labels:
+#               - 'unit'
+#             regex: "session-(.*)"
+#             action: replace
+#             replacement: 'pam-session'
+#             target_label: 'unit'
 #
 # @example Merging scrape configs in Hiera
 #   class profile::logging::promtail {
