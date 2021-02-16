@@ -23,7 +23,7 @@
 
 ## Classes
 
-### `promtail`
+### <a name="promtail"></a>`promtail`
 
 promtail's main interface. All interactions should be with this class. The promtail
 module is intended to install and configure Grafana's promtail tool for shipping
@@ -37,13 +37,21 @@ logs to Loki.
 include promtail
 ```
 
-##### 
+##### Sample of defining within a profile
 
 ```puppet
 class { 'promtail':
-  config_hash           => $config_hash,
-  password_file_path    => '/etc/promtail/.gc_pw',
-  password_file_content => Sensitive('myPassword'),
+  clients_config_hash   => $clients_config_hash,
+  positions_config_hash => $positions_config_hash,
+  scrape_configs_hash   => $_real_scrape_configs_hash,
+  password_file_content => $sensitive_password_file_content,
+  password_file_path    => $password_file_path,
+  service_ensure        => $service_ensure,
+  server_config_hash    => $server_config_hash,
+  target_config_hash    => $target_config_hash,
+  bin_dir               => $bin_dir,
+  checksum              => $checksum,
+  version               => $version,
 }
 ```
 
@@ -68,22 +76,22 @@ promtail::positions_config_hash:
     filename: /tmp/positions.yaml
 promtail::scrape_configs_hash:
   scrape_configs:
-    - job_name: system_secure
-      static_configs:
-      - targets:
-          - localhost
+    - job_name: journal
+      journal:
+        max_age: 12h
         labels:
-          job: var_log_secure
+          job: systemd-journal
           host: "%{facts.networking.fqdn}"
-          __path__: /var/log/secure
-    - job_name: system_messages
-      static_configs:
-      - targets:
-          - localhost
-        labels:
-          job: var_log_messages
-          host: "%{facts.networking.fqdn}"
-          __path__: /var/log/messages
+      relabel_configs:
+        - source_labels:
+            - '__journal__systemd_unit'
+          target_label: 'unit'
+        - source_labels:
+            - 'unit'
+          regex: "session-(.*)"
+          action: replace
+          replacement: 'pam-session'
+          target_label: 'unit'
 ```
 
 ##### Merging scrape configs in Hiera
@@ -99,21 +107,35 @@ class profile::logging::promtail {
 
 #### Parameters
 
-The following parameters are available in the `promtail` class.
+The following parameters are available in the `promtail` class:
 
-##### `service_enable`
+* [`service_enable`](#service_enable)
+* [`service_ensure`](#service_ensure)
+* [`clients_config_hash`](#clients_config_hash)
+* [`positions_config_hash`](#positions_config_hash)
+* [`scrape_configs_hash`](#scrape_configs_hash)
+* [`bin_dir`](#bin_dir)
+* [`checksum`](#checksum)
+* [`version`](#version)
+* [`server_config_hash`](#server_config_hash)
+* [`target_config_hash`](#target_config_hash)
+* [`password_file_path`](#password_file_path)
+* [`password_file_content`](#password_file_content)
+* [`source_url`](#source_url)
+
+##### <a name="service_enable"></a>`service_enable`
 
 Data type: `Boolean`
 
 The value passed to the service resource's enable parameter for promtail's service
 
-##### `service_ensure`
+##### <a name="service_ensure"></a>`service_ensure`
 
 Data type: `Enum['running', 'stopped']`
 
 The value passed to the service resource's ensure parameter for promtail's service
 
-##### `clients_config_hash`
+##### <a name="clients_config_hash"></a>`clients_config_hash`
 
 Data type: `Hash`
 
@@ -121,7 +143,7 @@ Describes how Promtail connects to multiple instances of Loki, sending logs to e
 See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
 for all parameters.
 
-##### `positions_config_hash`
+##### <a name="positions_config_hash"></a>`positions_config_hash`
 
 Data type: `Hash`
 
@@ -129,7 +151,7 @@ Describes how to save read file offsets to disk.
 See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
 for all parameters.
 
-##### `scrape_configs_hash`
+##### <a name="scrape_configs_hash"></a>`scrape_configs_hash`
 
 Data type: `Hash`
 
@@ -138,13 +160,13 @@ using a specified discovery method.
 See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
 for all parameters.
 
-##### `bin_dir`
+##### <a name="bin_dir"></a>`bin_dir`
 
 Data type: `Stdlib::Absolutepath`
 
 The directory in which to create a symlink to the promtail binary
 
-##### `checksum`
+##### <a name="checksum"></a>`checksum`
 
 Data type: `String[1]`
 
@@ -152,14 +174,14 @@ The checksum of the promtail binary.
 Note: each platform has its own checksum.
 Values can be found with each release on GitHub
 
-##### `version`
+##### <a name="version"></a>`version`
 
 Data type: `String[1]`
 
 The version as listed on the GitHub release page
 See https://github.com/grafana/loki/releases for a list
 
-##### `server_config_hash`
+##### <a name="server_config_hash"></a>`server_config_hash`
 
 Data type: `Optional[Hash]`
 
@@ -170,7 +192,7 @@ for all parameters.
 
 Default value: ``undef``
 
-##### `target_config_hash`
+##### <a name="target_config_hash"></a>`target_config_hash`
 
 Data type: `Optional[Hash]`
 
@@ -181,7 +203,7 @@ for all parameters.
 
 Default value: ``undef``
 
-##### `password_file_path`
+##### <a name="password_file_path"></a>`password_file_path`
 
 Data type: `Optional[Stdlib::Absolutepath]`
 
@@ -189,7 +211,7 @@ The fully qualified path to the file containing the password used for basic auth
 
 Default value: ``undef``
 
-##### `password_file_content`
+##### <a name="password_file_content"></a>`password_file_content`
 
 Data type: `Optional[Sensitive[String[1]]]`
 
@@ -198,7 +220,7 @@ lookup_options defined in `data/common.yaml`
 
 Default value: ``undef``
 
-##### `source_url`
+##### <a name="source_url"></a>`source_url`
 
 Data type: `Stdlib::HTTPUrl`
 
@@ -208,7 +230,7 @@ Default value: `'https://github.com/grafana/loki/releases/download'`
 
 ## Functions
 
-### `promtail::strip_yaml_header`
+### <a name="promtailstrip_yaml_header"></a>`promtail::strip_yaml_header`
 
 Type: Ruby 4.x API
 
@@ -250,7 +272,7 @@ Data type: `String`
 
 A string that may start with the ---'s used to denote a YAML file
 
-### `promtail::to_yaml`
+### <a name="promtailto_yaml"></a>`promtail::to_yaml`
 
 Type: Ruby 4.x API
 
