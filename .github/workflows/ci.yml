@@ -13,7 +13,7 @@ jobs:
       matrix:
         puppet_versions:
           - '6'
-          # - '7' # PDK doesn't support Puppet 7 directly as of 1.18.1
+          - '7'
 
     name: Puppet ${{ matrix.puppet_versions }}
     steps:
