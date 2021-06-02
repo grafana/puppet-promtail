@@ -6,13 +6,22 @@
 class promtail::install {
   include archive
 
+  case $facts['os']['architecture'] {
+    'x86_64', 'amd64': { $arch = 'amd64' },
+    'aarch64': { $arch = 'arm64' },
+    'armv7l': { $arch = 'arm' },
+    default: {
+      fail("Unsupported kernel architecture: ${facts['os']['architecture']}")
+    }
+  }
+
   case $facts['kernel'] {
     'Linux': {
       $data_dir = '/usr/local/promtail_data'
       if versioncmp($promtail::version, 'v0.3.0') > 0 {
-        $release_file_name = 'promtail-linux-amd64'
+        $release_file_name = "promtail-linux-${arch}"
       } else {
-        $release_file_name = 'promtail_linux_amd64'
+        $release_file_name = "promtail_linux_${arch}"
       }
     }
     default: { fail("${facts['kernel']} is not yet supported") }
