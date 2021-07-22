@@ -54,12 +54,12 @@ class promtail::install {
       ensure  => file,
       mode    => '0755',
       require => Archive["${binary_path}.gz"],
-    ;
+      ;
     "${promtail::bin_dir}/promtail":
       ensure  => link,
       target  => $binary_path,
       require => File[$binary_path],
       notify  => Service['promtail'],
-    ;
+      ;
   }
 }

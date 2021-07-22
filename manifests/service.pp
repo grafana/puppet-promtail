@@ -17,6 +17,6 @@ class promtail::service {
         require => Systemd::Unit_file['promtail.service'],
       }
     }
-    default: { fail("${facts['kernel']} is not supported")}
+    default: { fail("${facts['kernel']} is not supported") }
   }
 }

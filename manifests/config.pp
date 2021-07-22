@@ -8,7 +8,7 @@ class promtail::config {
     'Linux': {
       $config_dir = '/etc/promtail'
     }
-    default: { fail("${facts['kernel']} is not supported")}
+    default: { fail("${facts['kernel']} is not supported") }
   }
 
   file { $config_dir:

@@ -6,17 +6,59 @@
 appveyor.yml:
   delete: true
 Gemfile:
-  optional:
+  required:
     ':development':
       - gem: 'github_changelog_generator'
-        version: '1.15.0'
+        version: '~> 1.15'
+      - gem: 'puppet-lint-absolute_classname-check'
+        version: '~> 3.0'
+      - gem: 'puppet-lint-absolute_template_path'
+        version: '~> 1.0'
+      - gem: 'puppet-lint-anchor-check'
+        version: '~> 1.0'
+      - gem: 'puppet-lint-classes_and_types_beginning_with_digits-check'
+        version: '~> 0.1'
+      - gem: 'puppet-lint-empty_string-check'
+        version: '~> 0.2'
+      - gem: 'puppet-lint-file_ensure-check'
+        version: '~> 0.3'
+      - gem: 'puppet-lint-leading_zero-check'
+        version: '~> 0.1'
+      - gem: 'puppet-lint-legacy_facts-check'
+        version: '~> 1.0'
+      - gem: 'puppet-lint-manifest_whitespace-check'
+        version: '~> 0.1'
+      - gem: 'puppet-lint-param-docs'
+        version: '~> 1.6'
+      - gem: 'puppet-lint-resource_reference_syntax'
+        version: '~> 1.0'
+      - gem: 'puppet-lint-spaceship_operator_without_tag-check'
+        version: '~> 0.1'
+      - gem: 'puppet-lint-strict_indent-check'
+        version: '~> 2.0'
+      - gem: 'puppet-lint-top_scope_facts-check'
+        version: '~> 1.0'
+      - gem: 'puppet-lint-topscope-variable-check'
+        version: '~> 1.0'
+      - gem: 'puppet-lint-trailing_comma-check'
+        version: '~> 0.4'
+      - gem: 'puppet-lint-trailing_newline-check'
+        version: '~> 1.1'
+      - gem: 'puppet-lint-undef_in_function-check'
+        version: '~> 0.2'
+      - gem: 'puppet-lint-unquoted_string-check'
+        version: '~> 2.0'
+      - gem: 'puppet-lint-variable_contains_upcase'
+        version: '~> 1.2'
+      - gem: 'puppet-lint-version_comparison-check'
+        version: '~> 0.2'
 Rakefile:
   changelog_user: 'grafana'
   changelog_project: 'puppet-promtail'
   changelog_version_tag_pattern: '%s'
+  linter_fail_on_warnings: true
   requires:
     - 'puppet-strings/tasks'
 spec/spec_helper.rb:
   mock_with: ':rspec'
   coverage_report: true
-

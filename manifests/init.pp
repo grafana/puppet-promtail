@@ -136,7 +136,7 @@ class promtail (
   Optional[Stdlib::Absolutepath] $password_file_path    = undef,
   Optional[Sensitive[String[1]]] $password_file_content = undef,
   Stdlib::HTTPUrl                $source_url            = 'https://github.com/grafana/loki/releases/download',
-){
+) {
   Class['promtail::install']
   -> Class['promtail::config']
   -> Class['promtail::service']
