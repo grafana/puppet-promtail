@@ -14,6 +14,7 @@ Deploy and configure Grafana's Promtail on a node.
 - [Changelog](#changelog)
 - [Limitations](#limitations)
 - [Development](#development)
+- [Module Release](#module-release)
 
 ## Description
 
@@ -49,3 +50,14 @@ At the moment, this module only supports Linux. Future versions will support add
 ## Development
 
 Pull requests are welcome! A Vagrantfile is also included in this repository that can be used during development.
+
+## Module Release
+
+Follow the steps below to tag a new release and push to The Forge using GitHub Actions.
+
+1. Ensure that all closed PRs are labeled appropriately.
+2. Create a "Release Prep" PR with the label "maintenance" containing changes made by the following:
+    1. Bump the module version (X.Y.Z) in `metadata.json` as appropriate based on closed PRs since the previous release. (i.e. "backwards-incomptible" is an X "release", "feature" is a Y release, and "bugfix" is a Z release)
+    2. Run `pdk bundle exec puppet strings generate --format markdown`. Any missing documentation will result in a failed pipeline.
+    3. Run `pdk bundle exec rake changelog`. Any unlabeled PRs will result in a failed pipeline.
+3. Once the PR is merged, navigate to Actions --> Publish Module --> Run workflow --> select the main branch, and Run workflow.
