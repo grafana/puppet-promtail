@@ -19,7 +19,7 @@ class promtail::config {
 
   concat { $config_file:
     ensure => present,
-    notify => Service['promtail'],
+    notify => Systemd::Unit_file['promtail.service'],
   }
 
   concat::fragment { 'config_header':
