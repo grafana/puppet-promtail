@@ -59,7 +59,7 @@ class promtail::install {
       ensure  => link,
       target  => $binary_path,
       require => File[$binary_path],
-      notify  => Service['promtail'],
+      notify  => Systemd::Unit_file['promtail.service'],
       ;
   }
 }
