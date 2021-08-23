@@ -6,15 +6,12 @@
 class promtail::service {
   case $facts['kernel'] {
     'Linux': {
+      include systemd::systemctl::daemon_reload
       systemd::unit_file { 'promtail.service':
+        ensure => present,
         source => 'puppet:///modules/promtail/promtail.service',
-        notify => Service['promtail'],
-      }
-
-      service { 'promtail':
-        ensure  => $promtail::service_ensure,
-        enable  => $promtail::service_enable,
-        require => Systemd::Unit_file['promtail.service'],
+        enable => $promtail::service_enable,
+        active => $promtail::service_ensure == 'running'
       }
     }
     default: { fail("${facts['kernel']} is not supported") }
