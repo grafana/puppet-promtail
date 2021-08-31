@@ -9,7 +9,7 @@ Gemfile:
   required:
     ':development':
       - gem: 'github_changelog_generator'
-        version: '~> 1.15'
+        version: "~> 1.16', '>= 1.16.4"
       - gem: 'puppet-lint-absolute_classname-check'
         version: '~> 3.0'
       - gem: 'puppet-lint-absolute_template_path'
