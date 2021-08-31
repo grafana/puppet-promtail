@@ -32,28 +32,22 @@ All notable changes to this project will be documented in this file. The format 
 - Enable service by default [\#22](https://github.com/grafana/puppet-promtail/pull/22) ([kubicgruenfeld](https://github.com/kubicgruenfeld))
 - bump default promtail version to v2.0.0 [\#20](https://github.com/grafana/puppet-promtail/pull/20) ([kubicgruenfeld](https://github.com/kubicgruenfeld))
 - allow custom source-url [\#19](https://github.com/grafana/puppet-promtail/pull/19) ([kubicgruenfeld](https://github.com/kubicgruenfeld))
-
-## [0.3.1](https://github.com/grafana/puppet-promtail/tree/0.3.1) (2020-01-13)
-
-[Full Changelog](https://github.com/grafana/puppet-promtail/compare/0.3.0...0.3.1)
-
-### Fixed
-
-- Updated default checksum on Linux [\#16](https://github.com/grafana/puppet-promtail/pull/16) ([genebean](https://github.com/genebean))
-
-## [0.3.0](https://github.com/grafana/puppet-promtail/tree/0.3.0) (2020-01-13)
-
-[Full Changelog](https://github.com/grafana/puppet-promtail/compare/0.2.0...0.3.0)
-
-### Added
-
 - Bump default promtail version to v1.2.0 [\#14](https://github.com/grafana/puppet-promtail/pull/14) ([genebean](https://github.com/genebean))
 - Add example of merging scrape configs from Hiera [\#13](https://github.com/grafana/puppet-promtail/pull/13) ([genebean](https://github.com/genebean))
 
 ### Fixed
 
+- Updated default checksum on Linux [\#16](https://github.com/grafana/puppet-promtail/pull/16) ([genebean](https://github.com/genebean))
 - Release file name changed from version v0.4.0 [\#12](https://github.com/grafana/puppet-promtail/pull/12) ([LDaneliukas](https://github.com/LDaneliukas))
 - Modify the type of archive depending on release version [\#11](https://github.com/grafana/puppet-promtail/pull/11) ([LDaneliukas](https://github.com/LDaneliukas))
+
+## [0.3.1](https://github.com/grafana/puppet-promtail/tree/0.3.1) (2020-01-13)
+
+[Full Changelog](https://github.com/grafana/puppet-promtail/compare/0.3.0...0.3.1)
+
+## [0.3.0](https://github.com/grafana/puppet-promtail/tree/0.3.0) (2020-01-13)
+
+[Full Changelog](https://github.com/grafana/puppet-promtail/compare/0.2.0...0.3.0)
 
 ## [0.2.0](https://github.com/grafana/puppet-promtail/tree/0.2.0) (2019-12-12)
 
