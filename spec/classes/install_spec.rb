@@ -3,8 +3,9 @@ require 'spec_helper'
 describe 'promtail::install' do
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
+      let(:facts) { os_facts }
+
       context 'with valid params' do
-        let(:facts) { os_facts }
         let(:pre_condition) do
           "class { 'promtail':
             password_file_path    => '/etc/promtail/.gc_pw',
@@ -45,9 +46,30 @@ describe 'promtail::install' do
           }"
         end
 
-        it { is_expected.to compile }
+        it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_file('/usr/local/bin/promtail').with_ensure('link') }
         it { is_expected.to contain_file('/usr/local/promtail_data').with_ensure('directory') }
+        it { is_expected.to contain_file('/usr/local/promtail_data/promtail-v2.0.0/promtail-linux-amd64').with_ensure('file') }
+        it { is_expected.to contain_file('/usr/local/promtail_data/promtail-v2.0.0').with_ensure('directory') }
+        it { is_expected.to contain_archive('/usr/local/promtail_data/promtail-v2.0.0/promtail-linux-amd64.gz') }
+        it { is_expected.not_to contain_package('promtail') }
+      end
+
+      context 'with package based installation' do
+        let(:pre_condition) do
+          "class { 'promtail':
+            server_config_hash    => {},
+            clients_config_hash => {},
+            positions_config_hash => {},
+            scrape_configs_hash => {},
+            install_method => 'package',
+          }"
+        end
+
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.not_to contain_file('/usr/local/bin/promtail') }
+        it { is_expected.not_to contain_file('/usr/local/promtail_data') }
+        it { is_expected.to contain_package('promtail') }
       end
     end
   end
