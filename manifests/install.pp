@@ -7,10 +7,10 @@ class promtail::install {
   include archive
 
   case $facts['os']['architecture'] {
-    'x86_64', 'amd64': { $arch = 'amd64' }
-    'aarch64':         { $arch = 'arm64' }
-    'armv7l':          { $arch = 'arm' }
-    default:           { fail("Unsupported kernel architecture: ${facts['os']['architecture']}") }
+    'x86_64', 'amd64', 'x64': { $arch = 'amd64' }
+    'aarch64':                { $arch = 'arm64' }
+    'armv7l':                 { $arch = 'arm' }
+    default:                  { fail("Unsupported kernel architecture: ${facts['os']['architecture']}") }
   }
 
   case $facts['kernel'] {
