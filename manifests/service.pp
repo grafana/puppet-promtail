@@ -27,7 +27,7 @@ class promtail::service {
       exec { 'install_service':
         command  => "New-Service -Name promtail -StartupType Automatic -BinaryPathName \"${promtail::install::binary_link_path} --config.file ${promtail::config::config_file}\"",
         provider => powershell,
-        unless   => 'Get-Service promtail; exit (1-[int]$?)',
+        unless   => 'Get-Service promtail',
       }
 
       service { 'promtail':
