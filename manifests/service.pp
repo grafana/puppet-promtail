@@ -25,9 +25,10 @@ class promtail::service {
     }
     'windows': {
       service { 'promtail':
-        ensure => $promtail::service_ensure,
-        enable => $promtail::service_enable,
-        start  => "${promtail::install::binary_link_path} --config.file ${promtail::config::config_file}"
+        ensure  => $promtail::service_ensure,
+        enable  => $promtail::service_enable,
+        start   => "${promtail::install::binary_link_path} --config.file ${promtail::config::config_file}",
+        require => Exec['install_service']
       }
     }
     default: { fail("${facts['kernel']} is not supported") }
