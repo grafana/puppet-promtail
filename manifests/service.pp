@@ -24,17 +24,24 @@ class promtail::service {
       }
     }
     'windows': {
-      exec { 'install_service':
-        command  => "sc.exe create promtail binPath=\"${promtail::install::binary_link_path} --config.file ${promtail::config::config_file}\" displayname=\"Grafana Promtail\" start= auto",
-        provider => powershell,
-        unless   => 'Get-Service promtail',
+      if $promtail::service_enable {
+        $running_mode = 'auto'
+      } else {
+        $running_mode = 'disabled'
       }
 
-      service { 'promtail':
-        ensure   => $promtail::service_ensure,
-        enable   => $promtail::service_enable,
-        provider => windows,
-        require  => Exec['install_service']
+      if $promtail::service_ensure == 'present' {
+        exec { 'install_service':
+          command  => "sc.exe create promtail binPath=\"${promtail::install::binary_link_path} --config.file ${promtail::config::config_file}\" displayname=\"Grafana Promtail\" start= ${running_mode}",
+          provider => powershell,
+          unless   => 'sc.exe query promtail',
+        }
+      } elsif {
+        exec { 'install_service':
+          command  => 'sc.exe delete promtail',
+          provider => powershell,
+          onlyif   => 'sc.exe query promtail',
+        }
       }
     }
     default: { fail("${facts['kernel']} is not supported") }
