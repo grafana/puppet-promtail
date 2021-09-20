@@ -35,6 +35,9 @@
 # @param [Stdlib::Absolutepath] data_dir
 #   The directory in which to versions of promtail are stored and updated
 #
+# @param [Stdlib::Absolutepath] log_file_path
+#   The directory in logs should be stored (Windows only feature!)
+#
 # @param [String[1]] checksum
 #   The checksum of the promtail binary.
 #   Note: each platform has its own checksum.
@@ -137,6 +140,7 @@ class promtail (
   Stdlib::Absolutepath                  $bin_dir               = $promtail::params::bin_dir,
   Stdlib::Absolutepath                  $data_dir              = $promtail::params::data_dir,
   Stdlib::Absolutepath                  $config_dir            = $promtail::params::config_dir,
+  Optional[Stdlib::Absolutepath]        $log_file_path         = undef,
   String[1]                             $checksum,
   String[1]                             $version,
   Optional[Hash]                        $server_config_hash    = undef,

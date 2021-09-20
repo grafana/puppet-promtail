@@ -4,11 +4,7 @@
 #
 # @api private
 class promtail::service {
-  $service_to_notify = $facts['kernel'] ? {
-    'Linux'   => Systemd::Unit_file['promtail.service'],
-    'windows' => Service['promtail'],
-    default   => undef
-  }
+  $service_to_notify = Service['promtail']
 
   case $facts['kernel'] {
     'Linux': {
@@ -24,22 +20,17 @@ class promtail::service {
       }
     }
     'windows': {
-      if $promtail::service_enable {
-        $running_mode = 'Automatic'
-      } else {
-        $running_mode = 'Manual'
-      }
-
-      exec { 'install_service':
-        command  => "New-Service -Name \"promtail\" -BinaryPathName \"${promtail::install::binary_link_path} --config.file='${promtail::config::config_file}'\" -StartupType \"${running_mode}\" -DisplayName \"Grafana Promtail\" -Description \"Service for Grafana Promtail.\"",
-        provider => powershell,
-        unless   => 'if ([bool](Get-Service -Name "promtail" | Select-String -Pattern "promtail" -SimpleMatch -Quiet)) { exit 0 } else { exit 1 }'
+      nssm::service { 'promtail':
+        ensure         => $promtail::service_ensure,
+        command        => $promtail::install::binary_link_path,
+        app_parameters => "--config.file='${promtail::config::config_file}'",
+        log_file_path  => $promtail::log_file_path
       }
 
       service { 'promtail':
         ensure  => $promtail::service_ensure,
         enable  => $promtail::service_enable,
-        require => Exec['install_service'],
+        require => Nssm::Service['promtail'],
       }
     }
     default: { fail("${facts['kernel']} is not supported") }
