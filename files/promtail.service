@@ -3,10 +3,15 @@ Description=Promtail agent from Grafana
 Documentation=https://github.com/grafana/loki/tree/master/docs/clients/promtail
 After=network.target
 
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
 [Service]
 ExecStart=/usr/local/bin/promtail -config.file=/etc/promtail/config.yaml
 ExecReload=/bin/kill -HUP $MAINPID
+
 Restart=on-failure
+RestartSec=2s
 RestartForceExitStatus=SIGPIPE
 KillMode=control-group
 

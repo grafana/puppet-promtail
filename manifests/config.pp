@@ -6,20 +6,22 @@
 class promtail::config {
   case $facts['kernel'] {
     'Linux': {
-      $config_dir = '/etc/promtail'
+      $config_file = "${promtail::config_dir}/config.yaml"
+    }
+    'windows': {
+      $config_file = "${promtail::config_dir}\\config.yaml"
     }
     default: { fail("${facts['kernel']} is not supported") }
   }
 
-  file { $config_dir:
+  file { $promtail::config_dir:
     ensure => directory,
   }
 
-  $config_file = "${config_dir}/config.yaml"
-
   concat { $config_file:
-    ensure => present,
-    notify => Service['promtail'],
+    ensure  => present,
+    require => File[$promtail::config_dir],
+    notify  => $promtail::service::service_to_notify,
   }
 
   concat::fragment { 'config_header':
