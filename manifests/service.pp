@@ -20,8 +20,12 @@ class promtail::service {
       }
     }
     'windows': {
+      $nssm_presents = $promtail::service_ensure ? {
+        'running' => 'present',
+        default => $promtail::service_ensure
+      }
       nssm::service { 'promtail':
-        ensure         => $promtail::service_ensure,
+        ensure         => $nssm_presents,
         command        => $promtail::install::binary_link_path,
         app_parameters => "--config.file='${promtail::config::config_file}'",
         log_file_path  => $promtail::log_file_path
