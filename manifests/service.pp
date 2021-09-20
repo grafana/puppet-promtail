@@ -25,23 +25,21 @@ class promtail::service {
     }
     'windows': {
       if $promtail::service_enable {
-        $running_mode = 'auto'
+        $running_mode = 'AutomaticDelayedStart'
       } else {
-        $running_mode = 'disabled'
+        $running_mode = 'Manual'
       }
 
-      if $promtail::service_ensure == 'present' {
-        exec { 'install_service':
-          command  => "sc.exe create promtail binPath=\"${promtail::install::binary_link_path} --config.file ${promtail::config::config_file}\" displayname=\"Grafana Promtail\" start= ${running_mode}",
-          provider => powershell,
-          unless   => 'sc.exe query promtail',
-        }
-      } elsif {
-        exec { 'install_service':
-          command  => 'sc.exe delete promtail',
-          provider => powershell,
-          onlyif   => 'sc.exe query promtail',
-        }
+      exec { 'install_service':
+        command  => "New-Service -Name \"promtail\" -BinaryPathName '\"${promtail::install::binary_link_path} --config.file ${promtail::config::config_file}\"' -StartupType \"${running_mode}\" -DisplayName \"Grafana Promtail\" -Description \"Service for Grafana Promtail.\"",
+        provider => powershell,
+        unless   => 'Get-Service -Name "promtail"'
+      }
+
+      service { 'promtail':
+        ensure  => $promtail::service_ensure,
+        enable  => $promtail::service_enable,
+        require => Exec['install_service'],
       }
     }
     default: { fail("${facts['kernel']} is not supported") }

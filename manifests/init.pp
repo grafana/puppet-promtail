@@ -129,21 +129,21 @@
 #   }
 #
 class promtail (
-  Boolean                        $service_enable,
-  Enum['running', 'stopped']     $service_ensure,
-  Hash                           $clients_config_hash,
-  Hash                           $positions_config_hash,
-  Hash                           $scrape_configs_hash,
-  Stdlib::Absolutepath           $bin_dir               = $promtail::params::bin_dir,
-  Stdlib::Absolutepath           $data_dir              = $promtail::params::data_dir,
-  Stdlib::Absolutepath           $config_dir            = $promtail::params::config_dir,
-  String[1]                      $checksum,
-  String[1]                      $version,
-  Optional[Hash]                 $server_config_hash    = undef,
-  Optional[Hash]                 $target_config_hash    = undef,
-  Optional[Stdlib::Absolutepath] $password_file_path    = undef,
-  Optional[Sensitive[String[1]]] $password_file_content = undef,
-  Stdlib::HTTPUrl                $source_url            = 'https://github.com/grafana/loki/releases/download',
+  Boolean                               $service_enable,
+  Enum['running', 'stopped', 'absent']  $service_ensure,
+  Hash                                  $clients_config_hash,
+  Hash                                  $positions_config_hash,
+  Hash                                  $scrape_configs_hash,
+  Stdlib::Absolutepath                  $bin_dir               = $promtail::params::bin_dir,
+  Stdlib::Absolutepath                  $data_dir              = $promtail::params::data_dir,
+  Stdlib::Absolutepath                  $config_dir            = $promtail::params::config_dir,
+  String[1]                             $checksum,
+  String[1]                             $version,
+  Optional[Hash]                        $server_config_hash    = undef,
+  Optional[Hash]                        $target_config_hash    = undef,
+  Optional[Stdlib::Absolutepath]        $password_file_path    = undef,
+  Optional[Sensitive[String[1]]]        $password_file_content = undef,
+  Stdlib::HTTPUrl                       $source_url            = 'https://github.com/grafana/loki/releases/download',
 ) inherits promtail::params {
   Class['promtail::install']
   -> Class['promtail::config']
