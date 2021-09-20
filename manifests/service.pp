@@ -29,7 +29,7 @@ class promtail::service {
       nssm::service { 'promtail':
         ensure         => $nssm_presents,
         command        => $promtail::install::binary_link_path,
-        app_parameters => "--config.file=\"${promtail::config::config_file}\"",
+        app_parameters => "--config.file=\\\"${promtail::config::config_file}\\\"",
         log_file_path  => $promtail::log_file_path
       }
 
