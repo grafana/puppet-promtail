@@ -25,7 +25,7 @@ class promtail::service {
     }
     'windows': {
       if $promtail::service_enable {
-        $running_mode = 'AutomaticDelayedStart'
+        $running_mode = 'Automatic'
       } else {
         $running_mode = 'Manual'
       }
@@ -33,7 +33,7 @@ class promtail::service {
       exec { 'install_service':
         command  => "New-Service -Name \"promtail\" -BinaryPathName '\"${promtail::install::binary_link_path} --config.file ${promtail::config::config_file}\"' -StartupType \"${running_mode}\" -DisplayName \"Grafana Promtail\" -Description \"Service for Grafana Promtail.\"",
         provider => powershell,
-        unless   => 'if ([bool](Get-Service -Name "promtail" | Select-String -Pattern "Promtail" -SimpleMatch -Quiet)) { exit 0 } else { exit 1 }'
+        unless   => 'if ([bool](Get-Service -Name "promtail" | Select-String -Pattern "promtail" -SimpleMatch -Quiet)) { exit 0 } else { exit 1 }'
       }
 
       service { 'promtail':
