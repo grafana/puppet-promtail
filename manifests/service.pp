@@ -20,6 +20,8 @@ class promtail::service {
       }
     }
     'windows': {
+      require nssm
+
       $nssm_presents = $promtail::service_ensure ? {
         'running' => 'present',
         default => $promtail::service_ensure
