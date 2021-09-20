@@ -6,7 +6,7 @@ defaults:  # Used for any hierarchy level that omits these keys.
   data_hash: yaml_data  # Use the built-in YAML backend.
 
 hierarchy:
-  - name: 'kermel'
+  - name: 'kernel'
     path: "kernel/%{facts.kernel}.yaml"
   - name: 'common'
     path: 'common.yaml'
