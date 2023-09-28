@@ -12,18 +12,18 @@
 #
 # @param [Hash] clients_config_hash
 #   Describes how Promtail connects to multiple instances of Loki, sending logs to each.
-#   See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+#   See https://github.com/grafana/loki/blob/master/docs/sources/clients/promtail/configuration.md
 #   for all parameters.
 #
 # @param [Hash] positions_config_hash
 #   Describes how to save read file offsets to disk.
-#   See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+#   See https://github.com/grafana/loki/blob/master/docs/sources/clients/promtail/configuration.md
 #   for all parameters.
 #
 # @param [Hash] scrape_configs_hash
 #   Each scrape_config block configures how Promtail can scrape logs from a series of targets
 #   using a specified discovery method.
-#   See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+#   See https://github.com/grafana/loki/blob/master/docs/sources/clients/promtail/configuration.md
 #   for all parameters.
 #
 # @param [Stdlib::Absolutepath] bin_dir
@@ -41,13 +41,13 @@
 # @param [Optional[Hash]] server_config_hash
 #   Configures Promtail's behavior as an HTTP server. Defaults will be used if this block
 #   is omitted.
-#   See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+#   See https://github.com/grafana/loki/blob/master/docs/sources/clients/promtail/configuration.md
 #   for all parameters.
 #
 # @param [Optional[Hash]] target_config_hash
 #   Configures how tailed targets will be watched. Defaults will be used if this block
 #   is omitted.
-#   See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+#   See https://github.com/grafana/loki/blob/master/docs/sources/clients/promtail/configuration.md
 #   for all parameters.
 #
 # @param [Optional[Stdlib::Absolutepath]] password_file_path

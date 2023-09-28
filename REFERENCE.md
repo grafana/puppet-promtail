@@ -140,7 +140,7 @@ The value passed to the service resource's ensure parameter for promtail's servi
 Data type: `Hash`
 
 Describes how Promtail connects to multiple instances of Loki, sending logs to each.
-See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+See https://github.com/grafana/loki/blob/master/docs/sources/clients/promtail/configuration.md
 for all parameters.
 
 ##### <a name="positions_config_hash"></a>`positions_config_hash`
@@ -148,7 +148,7 @@ for all parameters.
 Data type: `Hash`
 
 Describes how to save read file offsets to disk.
-See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+See https://github.com/grafana/loki/blob/master/docs/sources/clients/promtail/configuration.md
 for all parameters.
 
 ##### <a name="scrape_configs_hash"></a>`scrape_configs_hash`
@@ -157,7 +157,7 @@ Data type: `Hash`
 
 Each scrape_config block configures how Promtail can scrape logs from a series of targets
 using a specified discovery method.
-See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+See https://github.com/grafana/loki/blob/master/docs/sources/clients/promtail/configuration.md
 for all parameters.
 
 ##### <a name="bin_dir"></a>`bin_dir`
@@ -187,7 +187,7 @@ Data type: `Optional[Hash]`
 
 Configures Promtail's behavior as an HTTP server. Defaults will be used if this block
 is omitted.
-See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+See https://github.com/grafana/loki/blob/master/docs/sources/clients/promtail/configuration.md
 for all parameters.
 
 Default value: ``undef``
@@ -198,7 +198,7 @@ Data type: `Optional[Hash]`
 
 Configures how tailed targets will be watched. Defaults will be used if this block
 is omitted.
-See https://github.com/grafana/loki/blob/master/docs/clients/promtail/configuration.md
+See https://github.com/grafana/loki/blob/master/docs/sources/clients/promtail/configuration.md
 for all parameters.
 
 Default value: ``undef``
