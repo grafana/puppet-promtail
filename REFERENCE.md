@@ -122,6 +122,9 @@ The following parameters are available in the `promtail` class:
 * [`password_file_path`](#password_file_path)
 * [`password_file_content`](#password_file_content)
 * [`source_url`](#source_url)
+* [`install_method`](#install_method)
+* [`package_ensure`](#package_ensure)
+* [`package_name`](#package_name)
 
 ##### <a name="service_enable"></a>`service_enable`
 
@@ -227,6 +230,30 @@ Data type: `Stdlib::HTTPUrl`
 The URL from which promtail packages can be downloaded
 
 Default value: `'https://github.com/grafana/loki/releases/download'`
+
+##### <a name="install_method"></a>`install_method`
+
+Data type: `Enum['package', 'archive']`
+
+The way how promtail shall be installed, supported are archive (binary from GitHub) or package from an existing repo
+
+Default value: `'archive'`
+
+##### <a name="package_ensure"></a>`package_ensure`
+
+Data type: `Enum['installed', 'absent']`
+
+The desired ensure state of the package. Only used if `$install_method` is set to `package`
+
+Default value: `'installed'`
+
+##### <a name="package_name"></a>`package_name`
+
+Data type: `String[1]`
+
+The name of the package. Only used if `$install_method` is set to `package`
+
+Default value: `'promtail'`
 
 ## Functions
 
