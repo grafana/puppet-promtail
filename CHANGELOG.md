@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [2.1.0](https://github.com/grafana/puppet-promtail/tree/2.1.0) (2021-08-31)
+
+[Full Changelog](https://github.com/grafana/puppet-promtail/compare/2.0.0...2.1.0)
+
+### Added
+
+- updating dependencies and adding ubuntu 20.04 support [\#34](https://github.com/grafana/puppet-promtail/pull/34) ([attachmentgenie](https://github.com/attachmentgenie))
+
 ## [2.0.0](https://github.com/grafana/puppet-promtail/tree/2.0.0) (2021-07-30)
 
 [Full Changelog](https://github.com/grafana/puppet-promtail/compare/1.0.0...2.0.0)

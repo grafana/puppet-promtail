@@ -6,6 +6,6 @@ fixtures:
     archive: 'puppet/archive'
     concat: 'puppetlabs/concat'
     inifile: 'puppetlabs/inifile'
-    systemd: 'camptocamp/systemd'
+    systemd: 'puppet/systemd'
     stdlib: 'puppetlabs/stdlib'
     translate: 'puppetlabs/translate'
