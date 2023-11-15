@@ -145,7 +145,7 @@ class promtail (
   Optional[Sensitive[String[1]]]          $password_file_content = undef,
   Optional[Stdlib::HTTPUrl]               $source_url            = 'https://github.com/grafana/loki/releases/download',
   Enum['package', 'archive']              $install_method        = 'archive',
-  Enum['installed', 'latest' 'absent']    $package_ensure        = 'installed',
+  Enum['installed', 'latest', 'absent']   $package_ensure        = 'installed',
   String[1]                               $package_name          = 'promtail',
 ) {
   Class['promtail::install']
