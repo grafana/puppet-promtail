@@ -15,7 +15,7 @@ class promtail::config {
     ensure => directory,
   }
 
-  $config_file = "${config_dir}/config.yaml"
+  $config_file = "${config_dir}/config.yml"
 
   concat { $config_file:
     ensure => present,
