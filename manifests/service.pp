@@ -6,13 +6,11 @@
 class promtail::service {
   case $facts['kernel'] {
     'Linux': {
-      if $promtail::install_method == 'archive' {
-        systemd::unit_file { 'promtail.service':
-          source => 'puppet:///modules/promtail/promtail.service',
-          notify => Service['promtail'],
-        }
+      systemd::unit_file { 'promtail.service':
+        source => 'puppet:///modules/promtail/promtail.service',
+        notify => Service['promtail'],
       }
-
+      
       service { 'promtail':
         ensure => $promtail::service_ensure,
         enable => $promtail::service_enable,
