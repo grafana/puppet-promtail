@@ -77,7 +77,7 @@ class promtail::config {
   if $promtail::password_file_path and $promtail::password_file_content {
     file { $promtail::password_file_path:
       ensure    => file,
-      mode      => '0600',
+      mode      => '0644',
       content   => unwrap($promtail::password_file_content),
       show_diff => false,
     }
