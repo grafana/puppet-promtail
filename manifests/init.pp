@@ -131,22 +131,22 @@
 #   }
 #
 class promtail (
-  Boolean                                 $service_enable,
-  Enum['running', 'stopped']              $service_ensure,
-  Hash                                    $clients_config_hash,
-  Hash                                    $positions_config_hash,
-  Hash                                    $scrape_configs_hash,
-  Optional[Stdlib::Absolutepath]          $bin_dir,
-  Optional[String[1]]                     $version,
-  Optional[String[1]]                     $checksum              = undef,
-  Optional[Hash]                          $server_config_hash    = undef,
-  Optional[Hash]                          $target_config_hash    = undef,
-  Optional[Stdlib::Absolutepath]          $password_file_path    = undef,
-  Optional[Sensitive[String[1]]]          $password_file_content = undef,
-  Optional[Stdlib::HTTPUrl]               $source_url            = 'https://github.com/grafana/loki/releases/download',
-  Enum['package', 'archive']              $install_method        = 'archive',
-  Enum['installed', 'latest', 'absent']   $package_ensure        = 'installed',
-  String[1]                               $package_name          = 'promtail',
+  Optional[Boolean]                                 $service_enable,
+  Optional[Enum['running', 'stopped']]              $service_ensure,
+  Optional[Hash]                                    $clients_config_hash,
+  Optional[Hash]                                    $positions_config_hash,
+  Optional[Hash]                                    $scrape_configs_hash,
+  Optional[Stdlib::Absolutepath]                    $bin_dir,
+  Optional[String[1]]                               $version,
+  Optional[String[1]]                               $checksum              = undef,
+  Optional[Hash]                                    $server_config_hash    = undef,
+  Optional[Hash]                                    $target_config_hash    = undef,
+  Optional[Stdlib::Absolutepath]                    $password_file_path    = undef,
+  Optional[Sensitive[String[1]]]                    $password_file_content = undef,
+  Optional[Stdlib::HTTPUrl]                         $source_url            = 'https://github.com/grafana/loki/releases/download',
+  Optional[Enum['package', 'archive']]              $install_method        = 'archive',
+  Optional[Enum['installed', 'latest', 'absent']]   $package_ensure        = 'installed',
+  Optional[String[1]]                               $package_name          = 'promtail',
 ) {
   Class['promtail::install']
   -> Class['promtail::config']
