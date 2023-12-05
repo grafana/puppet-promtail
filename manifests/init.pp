@@ -131,12 +131,12 @@
 #   }
 #
 class promtail (
-  Optional[Boolean]                                 $service_enable,
-  Optional[Enum['running', 'stopped']]              $service_ensure,
+  Optional[Boolean]                                 $service_enable       = false,
+  Optional[Enum['running', 'stopped']]              $service_ensure       = 'stopped',
   Optional[Hash]                                    $clients_config_hash,
   Optional[Hash]                                    $positions_config_hash,
   Optional[Hash]                                    $scrape_configs_hash,
-  Optional[Stdlib::Absolutepath]                    $bin_dir,
+  Optional[Stdlib::Absolutepath]                    $bin_dir               = '/usr/bin/',
   Optional[String[1]]                               $version,
   Optional[String[1]]                               $checksum              = undef,
   Optional[Hash]                                    $server_config_hash    = undef,
@@ -144,8 +144,8 @@ class promtail (
   Optional[Stdlib::Absolutepath]                    $password_file_path    = undef,
   Optional[Sensitive[String[1]]]                    $password_file_content = undef,
   Optional[Stdlib::HTTPUrl]                         $source_url            = 'https://github.com/grafana/loki/releases/download',
-  Optional[Enum['package', 'archive']]              $install_method        = 'archive',
-  Optional[Enum['installed', 'latest', 'absent']]   $package_ensure        = 'installed',
+  Optional[Enum['package', 'archive']]              $install_method        = 'package',
+  Optional[Enum['installed', 'latest', 'absent']]   $package_ensure        = 'latest',
   Optional[String[1]]                               $package_name          = 'promtail',
 ) {
   Class['promtail::install']
