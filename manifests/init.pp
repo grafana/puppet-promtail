@@ -131,8 +131,8 @@
 #   }
 #
 class promtail (
-  Optional[Boolean]                                 $service_enable       = false,
-  Optional[Enum['running', 'stopped']]              $service_ensure       = 'stopped',
+  Optional[Boolean]                                 $service_enable        = false,
+  Optional[Enum['running', 'stopped']]              $service_ensure        = 'stopped',
   Optional[Hash]                                    $clients_config_hash,
   Optional[Hash]                                    $positions_config_hash,
   Optional[Hash]                                    $scrape_configs_hash,
