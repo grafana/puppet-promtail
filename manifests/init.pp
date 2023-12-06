@@ -149,10 +149,10 @@ class promtail (
   Optional[String[1]]                               $package_name          = 'promtail',
 ) {
   Class['promtail::install']
-  -> Class['promtail::config']
   -> Class['promtail::service']
+  -> Class['promtail::config']
 
   contain promtail::install
-  contain promtail::config
   contain promtail::service
+  contain promtail::config
 }
