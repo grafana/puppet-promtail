@@ -10,62 +10,45 @@
   "dependencies": [
     {
       "name": "puppet/systemd",
-      "version_requirement": ">= 2.2.0 < 5.0.0"
+      "version_requirement": ">= 2.2.0 < 7.0.0"
     },
     {
       "name": "puppet/archive",
-      "version_requirement": ">= 4.2.0 < 7.0.0"
+      "version_requirement": ">= 4.2.0 < 8.0.0"
     },
     {
       "name": "puppetlabs/concat",
-      "version_requirement": ">= 6.0.0 < 9.0.0"
+      "version_requirement": ">= 6.0.0 < 10.0.0"
     },
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 6.0.0 < 9.0.0"
+      "version_requirement": ">= 6.0.0 < 10.0.0"
     }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "CentOS",
-      "operatingsystemrelease": [
-        "7",
-        "8"
-      ]
+      "operatingsystemrelease": ["7", "8"]
     },
     {
       "operatingsystem": "OracleLinux",
-      "operatingsystemrelease": [
-        "7",
-        "8"
-      ]
+      "operatingsystemrelease": ["7", "8"]
     },
     {
       "operatingsystem": "RedHat",
-      "operatingsystemrelease": [
-        "7",
-        "8"
-      ]
+      "operatingsystemrelease": ["7", "8"]
     },
     {
       "operatingsystem": "Scientific",
-      "operatingsystemrelease": [
-        "7"
-      ]
+      "operatingsystemrelease": ["7"]
     },
     {
       "operatingsystem": "Debian",
-      "operatingsystemrelease": [
-        "9",
-        "10"
-      ]
+      "operatingsystemrelease": ["9", "10"]
     },
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": [
-        "18.04",
-        "20.04"
-      ]
+      "operatingsystemrelease": ["18.04", "20.04"]
     }
   ],
   "requirements": [
