@@ -15,7 +15,7 @@ class promtail::config {
     ensure => directory,
   }
 
-  $config_file = "${config_dir}/config.yaml"
+  $config_file = "${config_dir}/config.yml"
 
   concat { $config_file:
     ensure => present,
@@ -77,7 +77,7 @@ class promtail::config {
   if $promtail::password_file_path and $promtail::password_file_content {
     file { $promtail::password_file_path:
       ensure    => file,
-      mode      => '0600',
+      mode      => '0644',
       content   => unwrap($promtail::password_file_content),
       show_diff => false,
     }

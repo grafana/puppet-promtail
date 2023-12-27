@@ -10,11 +10,10 @@ class promtail::service {
         source => 'puppet:///modules/promtail/promtail.service',
         notify => Service['promtail'],
       }
-
+      
       service { 'promtail':
-        ensure  => $promtail::service_ensure,
-        enable  => $promtail::service_enable,
-        require => Systemd::Unit_file['promtail.service'],
+        ensure => $promtail::service_ensure,
+        enable => $promtail::service_enable,
       }
     }
     default: { fail("${facts['kernel']} is not supported") }
