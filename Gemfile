@@ -36,7 +36,7 @@ group :development do
   gem "puppet-lint-manifest_whitespace-check", '~> 0.1',                     require: false
   gem "puppet-lint-param-docs", '~> 1.6',                                    require: false
   gem "puppet-lint-resource_reference_syntax", '~> 1.0',                     require: false
-  gem "puppet-lint-spaceship_operator_without_tag-check", '~> 0.1',          require: false
+  gem "puppet-lint-spaceship_operator_without_tag-check", '~> 2.0',          require: false
   gem "puppet-lint-strict_indent-check", '~> 2.0',                           require: false
   gem "puppet-lint-top_scope_facts-check", '~> 1.0',                         require: false
   gem "puppet-lint-topscope-variable-check", '~> 1.0',                       require: false
