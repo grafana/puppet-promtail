@@ -26,7 +26,7 @@ group :development do
   gem "puppet-module-win-dev-r#{minor_version}", '~> 1.0',                   require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "github_changelog_generator", '~> 1.16', '>= 1.16.4',                  require: false
   gem "puppet-lint-absolute_classname-check", '~> 3.0',                      require: false
-  gem "puppet-lint-absolute_template_path", '~> 1.0',                        require: false
+  gem "puppet-lint-absolute_template_path", '~> 2.0',                        require: false
   gem "puppet-lint-anchor-check", '~> 1.0',                                  require: false
   gem "puppet-lint-classes_and_types_beginning_with_digits-check", '~> 0.1', require: false
   gem "puppet-lint-empty_string-check", '~> 0.2',                            require: false
