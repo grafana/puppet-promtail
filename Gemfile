@@ -28,7 +28,7 @@ group :development do
   gem "puppet-lint-absolute_classname-check", '~> 3.0',                      require: false
   gem "puppet-lint-absolute_template_path", '~> 1.0',                        require: false
   gem "puppet-lint-anchor-check", '~> 1.0',                                  require: false
-  gem "puppet-lint-classes_and_types_beginning_with_digits-check", '~> 0.1', require: false
+  gem "puppet-lint-classes_and_types_beginning_with_digits-check", '~> 1.0', require: false
   gem "puppet-lint-empty_string-check", '~> 0.2',                            require: false
   gem "puppet-lint-file_ensure-check", '~> 0.3',                             require: false
   gem "puppet-lint-leading_zero-check", '~> 0.1',                            require: false
