@@ -33,7 +33,7 @@ group :development do
   gem "puppet-lint-file_ensure-check", '~> 0.3',                             require: false
   gem "puppet-lint-leading_zero-check", '~> 0.1',                            require: false
   gem "puppet-lint-legacy_facts-check", '~> 1.0',                            require: false
-  gem "puppet-lint-manifest_whitespace-check", '~> 0.1',                     require: false
+  gem "puppet-lint-manifest_whitespace-check", '~> 2.0',                     require: false
   gem "puppet-lint-param-docs", '~> 1.6',                                    require: false
   gem "puppet-lint-resource_reference_syntax", '~> 1.0',                     require: false
   gem "puppet-lint-spaceship_operator_without_tag-check", '~> 0.1',          require: false
