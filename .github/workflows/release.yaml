@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@0717577d45739eb3c851188b29f50ed6c0b2194e # v2
         with:
           ref: ${{ github.ref }}
           clean: true
@@ -66,7 +66,7 @@ jobs:
             exit 1
           fi
       - name: Tag Release
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1
         with:
           tag: ${{ steps.gv.outputs.ver }}
           token: ${{ secrets.GITHUB_TOKEN }}
